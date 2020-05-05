@@ -1,5 +1,6 @@
 from selenium import webdriver
-driver = webdriver.Chrome("C:/Users/camil/OneDrive/Desktop/ProyectoFutbolJorge/venv/chromedriver.exe")
+import os
+driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.get("https://www.uefa.com/uefachampionsleague/fixtures-results/#/rd/2001141/2")
 first = driver.find_element_by_xpath('//*[@id="calendar-service_teams-wrapper-modal"]')
 first.click()
