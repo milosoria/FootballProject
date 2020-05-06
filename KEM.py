@@ -7,8 +7,10 @@ driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.get("https://www.kemxtreme.cl/")
 explorando = True
 encontrado = False
+c = 0
 try:
     while explorando:
+        c += 1
         element = driver.find_element_by_xpath('//*[@id="generado"]')
         time.sleep(1)
         element = element.get_attribute('value')
@@ -20,8 +22,8 @@ try:
         soup = BS(driver.page_source, features = "html.parser")
         for item in soup.find_all(['div', 'h1']):
             if item.text.strip().find("sigue participando :( ¡hay millones de oportunidades!") != -1:
-                print("no ganaste")
-                print(element)
+                print("No ganaste")
+                print(str(c)+ "-"+str(element))
                 driver.find_element_by_xpath('//*[@id="principal"]/div[2]/div[3]/a').click()
                 encontrado = True
                 break
