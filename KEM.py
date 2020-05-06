@@ -8,6 +8,7 @@ driver.get("https://www.kemxtreme.cl/")
 explorando = True
 encontrado = False
 c = 0
+c_1 = 0
 try:
     while explorando:
         c += 1
@@ -20,13 +21,16 @@ try:
         send_button.click()
         time.sleep(1)
         soup = BS(driver.page_source, features = "html.parser")
+        c_1 = 0
         for item in soup.find_all(['div', 'h1']):
-            if item.text.strip().find("sigue participando :( ¡hay millones de oportunidades!") != -1:
-                print("No ganaste")
-                print(str(c)+ "-"+str(element))
-                driver.find_element_by_xpath('//*[@id="principal"]/div[2]/div[3]/a').click()
-                encontrado = True
-                break
+            c_1 += 1
+            if c_1 == 5:
+                if item.text.strip().find("sigue participando :( ¡hay millones de oportunidades!") != -1:
+                    print("No ganaste")
+                    print(str(c)+ "-"+str(element))
+                    driver.find_element_by_xpath('//*[@id="principal"]/div[2]/div[3]/a').click()
+                    encontrado = True
+                    break
         if not encontrado:
             explorando = False
             print("GANASTE!")
