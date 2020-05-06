@@ -34,3 +34,5 @@ try:
 except:
     print("GANASTE!")
     print(element)
+finally:
+    print(element)
