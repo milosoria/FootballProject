@@ -37,6 +37,7 @@ while explorando:
         print("GANASTE!")
         print(element)
         time.sleep(6)
+        "ahora si"
         """driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
         options = driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select')
         for j, option in enumerate(options.find_element_by_tag_name('option'), 0):
