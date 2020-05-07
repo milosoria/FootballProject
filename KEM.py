@@ -2,6 +2,9 @@ from selenium import webdriver
 import os
 import time
 from bs4 import BeautifulSoup as BS
+import winsound
+duration = 10000  # milliseconds
+freq = 440  # Hz
 driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.get("https://www.kemxtreme.cl/")
 explorando = True
@@ -30,11 +33,15 @@ while explorando:
                 break
     if not encontrado:
         explorando = False
+        winsound.Beep(freq, duration)
         print("GANASTE!")
         print(element)
         time.sleep(2)
         driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
-        driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select/option[3]').click()
+        options = driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]')
+        for j, option in enumerate(options.find_element_by_tag_name('option'), 0):
+            if j == 3:
+                option.click()
         driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[3]/input').send_keys(
             '202857442')
         driver.find_element_by_xpath('//*[@id="form"]/div/div[4]/fieldset/input').send_keys(
