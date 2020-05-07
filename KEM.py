@@ -37,7 +37,7 @@ while explorando:
         print("GANASTE!")
         print(element)
         time.sleep(6)
-        driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
+        """driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
         options = driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select')
         for j, option in enumerate(options.find_element_by_tag_name('option'), 0):
             if j == 3:
@@ -51,5 +51,5 @@ while explorando:
         driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[2]/input').send_keys(
             'camilo.soria@uc.cl')
         driver.find_element_by_xpath('//*[@id="enviar"]').click()
-        print("SE ENVIO EL FORM")
+        print("SE ENVIO EL FORM")"""
 
