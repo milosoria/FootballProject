@@ -9,7 +9,6 @@ driver = webdriver.Chrome(os.getcwd()+"\\chromedriver.exe")
 driver.get("https://www.kemxtreme.cl/")
 explorando = True
 c = 0
-c_1 = 0
 while explorando:
     encontrado = False
     c += 1
@@ -37,7 +36,6 @@ while explorando:
         print("GANASTE!")
         print(element)
         time.sleep(6)
-        "ahora si"
         """driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
         options = driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select')
         for j, option in enumerate(options.find_element_by_tag_name('option'), 0):
@@ -53,4 +51,3 @@ while explorando:
             'camilo.soria@uc.cl')
         driver.find_element_by_xpath('//*[@id="enviar"]').click()
         print("SE ENVIO EL FORM")"""
-
