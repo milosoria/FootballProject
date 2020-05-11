@@ -55,4 +55,3 @@ try:
 except:
     winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
     print("ERROR!")
-    driver.quit()
