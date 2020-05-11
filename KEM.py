@@ -1,10 +1,13 @@
+#Selenium
 from selenium import webdriver
+# Else
 import os
 import time
-from bs4 import BeautifulSoup as BS
 import winsound
+#BeautifulSoup4
+from bs4 import BeautifulSoup as BS
 try:
-    duration = 30000  # milliseconds
+    duration = 3000  # milliseconds
     freq = 440  # Hz
     driver = webdriver.Chrome(os.getcwd() + "\\chromedriver.exe")
     driver.get("https://www.kemxtreme.cl/")
@@ -14,13 +17,13 @@ try:
         encontrado = False
         c += 1
         element = driver.find_element_by_xpath('//*[@id="generado"]')
-        time.sleep(0.5)
+        time.sleep(1)
         element = element.get_attribute('value')
         input_1 = driver.find_element_by_xpath('//*[@id="form"]/fieldset/input')
         input_1.send_keys(element)
         send_button = driver.find_element_by_xpath('//*[@id="enviar"]')
         send_button.click()
-        time.sleep(0.5)
+        time.sleep(1)
         soup = BS(driver.page_source, features = "html.parser")
         for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
             if c_1 == 5:
@@ -35,17 +38,17 @@ try:
             winsound.Beep(freq, duration)
             print("GANASTE!")
             print(element)
-            time.sleep(6)
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
-            """options = driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select')
-            for j, option in enumerate(options.find_element_by_tag_name('option'), 0):
-                if j == 3:
-                    option.click()"""
+            try:
+                driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select/option[3]').click()
+            except:
+                print("Falló elegir masculino")
+            driver.find_element_by_xpath('//*[@id="form"]/div/div[5]/fieldset/input').send_keys("971083996")
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[3]/input').send_keys(
                 '202857442')
             driver.find_element_by_xpath('//*[@id="form"]/div/div[4]/fieldset/input').send_keys(
                 '20')
-            driver.find_element_by_xpath('//*[@id="form"]/div/div[5]/fieldset/input').send_keys(
+            driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[1]/input').send_keys(
                 'carmen tellez 4472')
             driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[2]/input').send_keys(
                 'camilo.soria@uc.cl')
