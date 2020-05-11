@@ -16,8 +16,8 @@ try:
     while explorando:
         encontrado = False
         c += 1
-        element = driver.find_element_by_xpath('//*[@id="generado"]')
         time.sleep(1)
+        element = driver.find_element_by_xpath('//*[@id="generado"]')
         element = element.get_attribute('value')
         input_1 = driver.find_element_by_xpath('//*[@id="form"]/fieldset/input')
         input_1.send_keys(element)
@@ -42,7 +42,7 @@ try:
             try:
                 driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select/option[3]').click()
             except:
-                print("Falló elegir masculino")
+                print("FALLÓ ELEGIR MASCULINO!!")
             driver.find_element_by_xpath('//*[@id="form"]/div/div[5]/fieldset/input').send_keys("971083996")
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[3]/input').send_keys(
                 '202857442')
@@ -55,3 +55,4 @@ try:
 except:
     winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
     print("ERROR!")
+    driver.quit()
