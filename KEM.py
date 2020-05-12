@@ -1,6 +1,6 @@
 #Selenium
 from selenium import webdriver
-# Else
+# Otros
 import os
 import time
 import winsound
@@ -17,41 +17,50 @@ try:
         encontrado = False
         c += 1
         time.sleep(1)
-        element = driver.find_element_by_xpath('//*[@id="generado"]')
-        element = element.get_attribute('value')
-        input_1 = driver.find_element_by_xpath('//*[@id="form"]/fieldset/input')
-        input_1.send_keys(element)
-        send_button = driver.find_element_by_xpath('//*[@id="enviar"]')
-        send_button.click()
+        element = driver.find_element_by_xpath('//*[@id="generado"]').get_attribute('value')
+        driver.find_element_by_xpath('//*[@id="form"]/fieldset/input').send_keys(element)
+        driver.find_element_by_xpath('//*[@id="enviar"]').click()
         time.sleep(1)
         soup = BS(driver.page_source, features = "html.parser")
         for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
             if c_1 == 5:
                 if item.text.strip().find("sigue participando :( ¡hay millones de oportunidades!") != -1:
-                    print("No ganaste")
-                    print(str(c) + "-" + str(element))
+                    """print("No ganaste")
+                    print(str(c) + "-" + str(element))"""
                     driver.find_element_by_xpath('//*[@id="principal"]/div[2]/div[3]/a').click()
                     encontrado = True
                     break
         if not encontrado:
-            explorando = False
-            winsound.Beep(freq, duration)
-            print("GANASTE!")
+            """winsound.Beep(freq, duration)"""
             print(element)
+            print("GANASTE!")
+            time.sleep(2)
+            # Busco qué gane
+            for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
+                if c_1 == 5:
+                    print(f"Has ganado un ======= {item.text.strip()}")
+            # Envío keys con datos a input boxes
+            # Nombre
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
-            try:
-                driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select/option[3]').click()
-            except:
-                print("FALLÓ ELEGIR MASCULINO!!")
+            # Género
+            driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[2]/select/option[3]').click()
+            # Número de teléfono
             driver.find_element_by_xpath('//*[@id="form"]/div/div[5]/fieldset/input').send_keys("971083996")
+            # Rut
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[3]/input').send_keys(
                 '202857442')
+            # Edad
             driver.find_element_by_xpath('//*[@id="form"]/div/div[4]/fieldset/input').send_keys(
                 '20')
+            # Dirección
             driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[1]/input').send_keys(
                 'carmen tellez 4472')
+            # Mail
             driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[2]/input').send_keys(
                 'camilo.soria@uc.cl')
+            driver.maximize_window()
+            # Enviar
+            driver.find_element_by_xpath('//*[@id="enviar"]').click()
 except:
-    winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
+    """winsound.PlaySound("SystemExit", winsound.SND_ALIAS)"""
     print("ERROR!")
