@@ -31,14 +31,16 @@ try:
                     encontrado = True
                     break
         if not encontrado:
-            """winsound.Beep(freq, duration)"""
+            winsound.Beep(freq, duration)
             print(element)
             print("GANASTE!")
             time.sleep(2)
             # Busco qué gane
-            for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
-                if c_1 == 5:
-                    print(f"Has ganado un ======= {item.text.strip()}")
+            try:
+                item = driver.find_element_by_class_name('recuadro mt-md-4 mx-3').get_attribute('innerHTML')
+                print(f"Has ganado un === {item.strip()}")
+            except:
+                print("Error encontrando premio, revisalo")
             # Envío keys con datos a input boxes
             # Nombre
             driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
@@ -58,9 +60,10 @@ try:
             # Mail
             driver.find_element_by_xpath('//*[@id="form"]/div/div[7]/fieldset[2]/input').send_keys(
                 'camilo.soria@uc.cl')
-            driver.maximize_window()
             # Enviar
             driver.find_element_by_xpath('//*[@id="enviar"]').click()
-except:
-    """winsound.PlaySound("SystemExit", winsound.SND_ALIAS)"""
+            driver.get("https://www.kemxtreme.cl/")
+except Exception as e:
+    winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
     print("ERROR!")
+    print(e)
