@@ -62,6 +62,7 @@ def kem():
                     'camilo.soria@uc.cl')
                 # Enviar
                 driver.find_element_by_xpath('//*[@id="enviar"]').click()
+                driver = webdriver.Chrome(os.getcwd() + "\\chromedriver.exe")
                 driver.get("https://www.kemxtreme.cl/")
     except Exception as e:
         winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
