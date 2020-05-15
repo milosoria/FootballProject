@@ -17,11 +17,11 @@ def kem():
         while explorando:
             encontrado = False
             c += 1
-            time.sleep(2)
+            time.sleep(1)
             element = driver.find_element_by_xpath('//*[@id="generado"]').get_attribute('value')
             driver.find_element_by_xpath('//*[@id="form"]/fieldset/input').send_keys(element)
             driver.find_element_by_xpath('//*[@id="enviar"]').click()
-            time.sleep(2)
+            time.sleep(1)
             soup = BS(driver.page_source, features = "html.parser")
             for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
                 if c_1 == 5:
@@ -33,14 +33,14 @@ def kem():
                         break
             if not encontrado:
                 winsound.Beep(freq, duration)
+                driver.maximize_window()
                 print("GANASTE:" + element)
-                time.sleep(6)
+                time.sleep(60)
                 # Busco qué gane
                 try:
-                    item = driver.find_element_by_class_name('recuadro mt-md-4 mx-3').get_attribute('innerHTML')
-                    print(f"Has ganado un: {item.strip()}")
-                except Exception as e_1:
-                    print(f"Error encontrando premio, revisalo: {e_1}")
+                    print([item.replace("\n", "") for item in soup.find_all(['div', 'h1']) if item.find("GAME PASS") != -1 or item.find("XBOX") != -1])
+                except:
+                    print("Sigue habiendo error en buscar el premio")
                 # Envío keys con datos a input boxes
                 # Nombre
                 driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
@@ -65,7 +65,7 @@ def kem():
                 driver = webdriver.Chrome(os.getcwd() + "\\chromedriver.exe")
                 driver.get("https://www.kemxtreme.cl/")
     except Exception as e:
-        winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
+        """winsound.PlaySound("SystemExit", winsound.SND_ALIAS)"""
         print("ERROR:", e)
         driver.quit()
         print("Reiniciando!")
