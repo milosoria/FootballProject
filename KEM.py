@@ -21,7 +21,7 @@ def kem():
             element = driver.find_element_by_xpath('//*[@id="generado"]').get_attribute('value')
             driver.find_element_by_xpath('//*[@id="form"]/fieldset/input').send_keys(element)
             driver.find_element_by_xpath('//*[@id="enviar"]').click()
-            time.sleep(1)
+            time.sleep(2)
             soup = BS(driver.page_source, features = "html.parser")
             for c_1, item in enumerate(soup.find_all(['div', 'h1']), 1):
                 if c_1 == 5:
@@ -39,8 +39,9 @@ def kem():
                 # Busco qué gane
                 try:
                     print([item.replace("\n", "") for item in soup.find_all(['div', 'h1']) if item.find("GAME PASS") != -1 or item.find("XBOX") != -1])
-                except:
+                except Exception as e:
                     print("Sigue habiendo error en buscar el premio")
+                    print(e)
                 # Envío keys con datos a input boxes
                 # Nombre
                 driver.find_element_by_xpath('//*[@id="form"]/div/div[2]/fieldset[1]/input').send_keys('camilo pascal soria aranguiz')
@@ -65,7 +66,7 @@ def kem():
                 driver = webdriver.Chrome(os.getcwd() + "\\chromedriver.exe")
                 driver.get("https://www.kemxtreme.cl/")
     except Exception as e:
-        """winsound.PlaySound("SystemExit", winsound.SND_ALIAS)"""
+        winsound.PlaySound("SystemExit", winsound.SND_ALIAS)
         print("ERROR:", e)
         driver.quit()
         print("Reiniciando!")
